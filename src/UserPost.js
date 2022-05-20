@@ -1,16 +1,14 @@
 import React from "react";
-import { useParams, useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const UserPost = ({ posts = [] }) => {
   const { postId } = useParams();
-  const { path } = useRouteMatch();
-  console.log(posts);
 
   if (!postId) {
     throw new Error("No URL parameter for postId");
   }
 
-  const post = posts.find((post) => `${post.id}` === postId);
+  const post = posts.find((p) => `${p.id}` === postId);
 
   return (
     <article>
