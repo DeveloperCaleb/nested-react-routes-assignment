@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Link,
-  NavLink,
   Route,
   Switch,
   useParams,
@@ -12,7 +11,7 @@ import UserProfile from "./UserProfile";
 
 export const User = ({ users = [] }) => {
   const { userId } = useParams();
-  const { path, url } = useRouteMatch()
+  const { path } = useRouteMatch();
 
   if (!userId) {
     throw new Error("No URL parameter for userId");
@@ -25,42 +24,12 @@ export const User = ({ users = [] }) => {
       <section>
         <Link to="/"> &lt;- Users</Link>
         <Switch>
-          <Route exact={true} path={`${url}`}>
-        <div>
-          <h2>{user.name}</h2>
-          <ul>
-            <li>
-              <NavLink to={`${url}`} data-testid="user-profile">
-                Profile
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={`${url}/posts`} data-testid="user-posts">
-                Posts
-              </NavLink>
-            </li>
-          </ul>
-          </div>
-          <UserProfile user={user} />
-          </Route>
-          <Route exact={true} path={`${path}/posts`}>
-                  <div>
-          <h2>{user.name}</h2>
-          <ul>
-            <li>
-              <NavLink to={`${url}`} data-testid="user-profile">
-                Profile
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={`${url}/posts`} data-testid="user-posts">
-                Posts
-              </NavLink>
-            </li>
-          </ul>
-          </div>
+          <Route path={`${path}/posts`}>
             <UserPosts posts={user.posts} />
-          </Route>   
+          </Route>
+          <Route path={`${path}`}>
+            <UserProfile user={user} />
+          </Route>
         </Switch>
       </section>
     );

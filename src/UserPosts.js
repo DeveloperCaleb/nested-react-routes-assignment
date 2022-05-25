@@ -15,23 +15,13 @@ export const UserPosts = ({ posts = [] }) => {
 
   return (
     <Switch>
-      <Route exact path={`${url}`}>
-        <div>
-          <div>
-            <ul>{postLinks}</ul>
-            <div>
-              <p>No post selected...</p>
-            </div>
-          </div>
-        </div>
+      <Route path={`${path}/:postId`}>
+        <UserPost posts={posts} />
       </Route>
-      <Route exact path={`${url}/:postId`}>
+      <Route exact path={`${path}`}>
         <div>
           <div>
             <ul>{postLinks}</ul>
-            <div>
-              <UserPost posts={posts} />
-            </div>
           </div>
         </div>
       </Route>
